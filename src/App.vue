@@ -1,19 +1,54 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <KForm :model="model" :rules="rules" ref="form">
+      <KFormItem label="用户名" prop="username">
+        <KInput v-model="model.username" type="text" />
+      </KFormItem>
+      <KFormItem label="密码" prop="password">
+        <KInput v-model="model.password" type="password" />
+      </KFormItem>
+      <KFormItem>
+        <button @click="loginIn">Login</button>
+      </KFormItem>
+    </KForm>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import KForm from "./components/KForm/KForm";
+import KFormItem from "./components/KForm/KFormItem";
+import KInput from "./components/KForm/KInput";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    KForm,
+    KFormItem,
+    KInput
+  },
+  data() {
+    return {
+      model: {
+        username: "jon",
+        password: ""
+      },
+      rules: {
+        username: [{ required: true, message: "用户名必填" }],
+        password: [{ required: true, message: "密码必填" }]
+      }
+    };
+  },
+  methods: {
+    loginIn() {
+      this.$refs.form.validate(isValid => {
+        if (isValid) {
+          alert("loginIn");
+        } else {
+          alert("fail");
+        }
+      });
+    }
   }
-}
+};
 </script>
 
 <style>
