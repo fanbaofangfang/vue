@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import emitter from "../../mixins/emitter";
 export default {
   inheritAttrs: false,
   props: {
@@ -11,10 +12,11 @@ export default {
       type: String
     }
   },
+  mixins: [emitter],
   methods: {
     onInput(e) {
       this.$emit("input", e.target.value);
-      this.$parent.$emit("validate");
+      this.dispatch("KFormItem", "el.form.change", [e.target.value]);
     }
   }
 };

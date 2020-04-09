@@ -20,10 +20,20 @@ export default {
     }
   },
   methods: {
-    validate() {
-      this.$children.map(ele => {
-        ele.validate();
-      });
+    change() {
+      console.log("change");
+    },
+    validate(cd) {
+      let arrs = this.$children
+        .filter(item => item["prop"])
+        .map(ele => ele.validate());
+      Promise.all(arrs)
+        .then(() => {
+          cd(true);
+        })
+        .catch(() => {
+          cd(false);
+        });
     }
   }
 };

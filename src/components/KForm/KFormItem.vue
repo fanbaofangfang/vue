@@ -8,6 +8,8 @@
 <script>
 import schema from "async-validator";
 export default {
+  name: "KFormItem",
+  componentName: "KFormItem",
   props: {
     label: {
       type: String,
@@ -22,9 +24,12 @@ export default {
     };
   },
   mounted() {
-    this.$on("validate", this.validate);
+    this.$on("el.form.change", this.onFieldChange);
   },
   methods: {
+    onFieldChange() {
+      this.validate();
+    },
     validate() {
       const rules = this.form.rules[this.prop];
       const value = this.form.model[this.prop];
@@ -32,8 +37,12 @@ export default {
         [this.prop]: rules
       };
       const validator = new schema(desc);
-      return validator.validate({ [this.prop]: value }, (error, fileds) => {
-        console.log(error, fileds);
+      return validator.validate({ [this.prop]: value }, errors => {
+        if (errors) {
+          this.errorMessage = errors[0].message;
+        } else {
+          this.errorMessage = "";
+        }
       });
     }
   }

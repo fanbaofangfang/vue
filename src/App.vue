@@ -7,6 +7,11 @@
       <KFormItem label="密码" prop="password">
         <KInput v-model="model.password" type="password" />
       </KFormItem>
+      <!-- <KFormItem> -->
+      <!-- <KCheckbox :checked="model.remember" @change="model.remember=$event" /> -->
+      <KCheckbox v-model="model.remember" />
+      <KCheckbox v-model="model.remember" />
+      <!-- </KFormItem> -->
       <KFormItem>
         <button @click="loginIn">Login</button>
       </KFormItem>
@@ -18,18 +23,21 @@
 import KForm from "./components/KForm/KForm";
 import KFormItem from "./components/KForm/KFormItem";
 import KInput from "./components/KForm/KInput";
+import KCheckbox from "./components/KForm/KCheckbox";
 export default {
   name: "App",
   components: {
     KForm,
     KFormItem,
-    KInput
+    KInput,
+    KCheckbox
   },
   data() {
     return {
       model: {
         username: "jon",
-        password: ""
+        password: "",
+        remember: false
       },
       rules: {
         username: [{ required: true, message: "用户名必填" }],
