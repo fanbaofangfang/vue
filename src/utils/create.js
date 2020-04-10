@@ -1,16 +1,17 @@
 import Vue from 'vue';
-export default function createComponent(Component, props) {
+export default function create(Component, props) {
     // 创建组件实例
+    console.log(props)
     const vm = new Vue({
         render(h) {
             return h(Component, { props })
         }
     }).$mount()
-    console.log(vm.$root);
     const comp = vm.$children[0];
-    document.body.appendChild(comp.$el);
+    document.body.appendChild(vm.$el);
     comp.remove = () => {
-        document.body.removeChild(comp.$el);
+        document.body.removeChild(vm.$el);
         vm.$destroy();
     }
+    return comp;
 }

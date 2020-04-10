@@ -1,36 +1,42 @@
 <template>
   <div id="app">
-    <KForm :model="model" :rules="rules" ref="form">
+    <!-- <KForm :model="model" :rules="rules" ref="form">
       <KFormItem label="用户名" prop="username">
         <KInput v-model="model.username" type="text" />
       </KFormItem>
       <KFormItem label="密码" prop="password">
         <KInput v-model="model.password" type="password" />
       </KFormItem>
-      <!-- <KFormItem> -->
-      <!-- <KCheckbox :checked="model.remember" @change="model.remember=$event" /> -->
+      <KFormItem>
+      <KCheckbox :checked="model.remember" @change="model.remember=$event" />
       <KCheckbox v-model="model.remember" />
       <KCheckbox v-model="model.remember" />
-      <!-- </KFormItem> -->
+      </KFormItem>
       <KFormItem>
         <button @click="loginIn">Login</button>
       </KFormItem>
-    </KForm>
+    </KForm>-->
+    <router-link to="/home">Home</router-link>
+    <div></div>
+    <router-link to="/foo">foo</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import KForm from "./components/KForm/KForm";
-import KFormItem from "./components/KForm/KFormItem";
-import KInput from "./components/KForm/KInput";
-import KCheckbox from "./components/KForm/KCheckbox";
+// import KForm from "./components/KForm/KForm";
+// import KFormItem from "./components/KForm/KFormItem";
+// import KInput from "./components/KForm/KInput";
+// import KCheckbox from "./components/KForm/KCheckbox";
+import Notice from "./components/Notice/index";
+import create from "./utils/create";
 export default {
   name: "App",
   components: {
-    KForm,
-    KFormItem,
-    KInput,
-    KCheckbox
+    // KForm,
+    // KFormItem,
+    // KInput,
+    // KCheckbox
   },
   data() {
     return {
@@ -47,12 +53,23 @@ export default {
   },
   methods: {
     loginIn() {
+      let notice;
       this.$refs.form.validate(isValid => {
+        let message = "";
         if (isValid) {
-          alert("loginIn");
+          message = "success";
+          // alert("loginIn");
         } else {
-          alert("fail");
+          // alert("fail");
+          message = "fail";
         }
+        notice = create(Notice, {
+          title: "xxx",
+          message: message,
+          duration: 10000
+        });
+        // console.log(notice, "notice");
+        notice.show();
       });
     }
   }
