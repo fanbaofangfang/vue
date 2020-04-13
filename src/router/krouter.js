@@ -47,9 +47,10 @@ class VueRouter {
         Vue.component('router-view', {
             //箭头函数保留this指向，这里指向vueRouter实例，用来获取当前组件
             render: (h) => {
+                console.log(this.routerMap['/foo'], 'routerMap')
+                console.log(this.app.current)
                 const comp = this.routerMap[this.app.current].component;
                 return h(comp);
-
             }
         })
 

@@ -16,7 +16,7 @@
         <button @click="loginIn">Login</button>
       </KFormItem>
     </KForm>-->
-    <router-link to="/home">Home</router-link>
+    <router-link to="/">Home</router-link>
     <div></div>
     <router-link to="/foo">foo</router-link>
     <router-view></router-view>
