@@ -16,10 +16,11 @@
         <button @click="loginIn">Login</button>
       </KFormItem>
     </KForm>-->
-    <router-link to="/">Home</router-link>
+    <!-- <router-link to="/">Home</router-link>
     <div></div>
     <router-link to="/foo">foo</router-link>
-    <router-view></router-view>
+    <router-view></router-view>-->
+    <VuexTest />
   </div>
 </template>
 
@@ -30,9 +31,11 @@
 // import KCheckbox from "./components/KForm/KCheckbox";
 import Notice from "./components/Notice/index";
 import create from "./utils/create";
+import VuexTest from "./pages/VuexTest";
 export default {
   name: "App",
   components: {
+    VuexTest
     // KForm,
     // KFormItem,
     // KInput,
