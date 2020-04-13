@@ -28,7 +28,9 @@ class Store {
         });
         //初始化mutations
         console.log(options)
-        this.mutations = options.mutations || {}
+        this.mutations = options.mutations || {};
+        this.actions = options.actions || {};
+        options.getters && this.handleGetters(options.getters)
     }
     //触发mutations，需要实现commit
     commit = (type, args) => {
@@ -36,6 +38,24 @@ class Store {
         const fn = this.mutations[type];
         fn(this.state, args)
     }
+    dispatch(type, args) {
+        const fn = this.actions[type];
+        return fn({ commit: this.commit, state: this.state }, args);
+    }
+
+    handleGetters(getters) {
+        this.getters = {};
+        //定义只读的属性
+        Object.keys(getters).forEach(key => {
+            Object.defineProperty(this.getters, key, {
+                get: () => {
+                    return getters[key](this.state)
+                }
+            })
+        })
+
+    }
+
 }
 
 export default { Store, install }
