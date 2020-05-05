@@ -21,12 +21,12 @@
     <script>
         const kaikeba = new KVue({
             el: "#app",
-            data() {
-                return {
+            data: {
+                // return {
                     name: 'I am test',
                     age: 12,
                     html: '<button>这是一个按钮</button>'
-                }
+                // }
             },
             created() {
                 console.log('开始啦！');
