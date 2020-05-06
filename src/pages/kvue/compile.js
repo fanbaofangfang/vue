@@ -53,6 +53,12 @@ class Compile {
   text(node, exp) {
     this.update(node, exp, "text");
   }
+  html(node,vm,exp){
+    this.update(node,exp,'html')
+  }
+  htmlUpdator(node,value){
+    node.innerHTML = value;
+  }
   compile(el) {
     const childNodes = el.childNodes;
     Array.from(childNodes).forEach((node) => {
